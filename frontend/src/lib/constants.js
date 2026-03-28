@@ -1,0 +1,11 @@
+export const INSTITUTIONS = ['ABC College', 'XYZ Institute', 'PQR University'];
+export const CAMPUSES = ['Main Campus', 'North Campus', 'South Campus'];
+export const DEPARTMENTS = ['Engineering', 'Science', 'Commerce', 'Arts'];
+export const PROGRAMS = ['CSE', 'ECE', 'ME', 'CE', 'EEE', 'ISE'];
+export const COURSE_TYPES = ['UG', 'PG'];
+export const ENTRY_TYPES = ['Regular', 'Lateral'];
+export const QUOTA_TYPES = ['KCET', 'COMEDK', 'Management'];
+export const CATEGORIES = ['GM', 'SC', 'ST', 'OBC'];
+export const GENDERS = ['Male', 'Female', 'Other'];
+export const ROLES = ['Admin', 'Admission Officer', 'Management'];
+export const DOC_STATUSES = ['Pending', 'Submitted', 'Verified'];
