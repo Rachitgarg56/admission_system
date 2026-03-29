@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { api } from '../../lib/api';
 import { CATEGORIES, ENTRY_TYPES, QUOTA_TYPES, GENDERS, DOC_STATUSES } from '../../lib/constants';
+import { useRole } from '../../lib/RoleContext';
 
 const EMPTY_FORM = {
   name: '', email: '', phone: '', date_of_birth: '', gender: '',
@@ -16,6 +17,7 @@ const docBadge = (s) => {
 };
 
 export default function ApplicantsPage() {
+  const { role } = useRole();
   const [applicants, setApplicants] = useState([]);
   const [form, setForm] = useState(EMPTY_FORM);
   const [showForm, setShowForm] = useState(false);
@@ -23,6 +25,8 @@ export default function ApplicantsPage() {
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
   const [updatingDoc, setUpdatingDoc] = useState(null);
+
+  const isAdmissionOfficer = role === 'Admission Officer';
 
   useEffect(() => { loadApplicants(); }, []);
 
@@ -71,16 +75,18 @@ export default function ApplicantsPage() {
           <h1 style={{ fontSize: '28px', marginBottom: '4px' }}>Applicants</h1>
           <p style={{ color: 'var(--text-muted)', fontSize: '13px' }}>Create and manage applicant records</p>
         </div>
-        <button className="btn-primary" onClick={() => { setShowForm(!showForm); setError(''); setSuccess(''); }}>
-          {showForm ? 'Cancel' : '+ New Applicant'}
-        </button>
+        {isAdmissionOfficer && (
+          <button className="btn-primary" onClick={() => { setShowForm(!showForm); setError(''); setSuccess(''); }}>
+            {showForm ? 'Cancel' : '+ New Applicant'}
+          </button>
+        )}
       </div>
 
       {error && <div className="error-msg">{error}</div>}
       {success && <div className="success-msg">{success}</div>}
 
       {/* Create Form */}
-      {showForm && (
+      {showForm && isAdmissionOfficer && (
         <div className="card" style={{ marginBottom: '1.5rem' }}>
           <h2 style={{ fontSize: '18px', marginBottom: '1.25rem' }}>New Applicant</h2>
           <form onSubmit={handleSubmit}>
@@ -214,7 +220,7 @@ export default function ApplicantsPage() {
                         className="input"
                         style={{ width: '120px', padding: '3px 6px', fontSize: '12px' }}
                         value={a.document_status}
-                        disabled={updatingDoc === a.id}
+                        disabled={updatingDoc === a.id || !isAdmissionOfficer}
                         onChange={e => handleDocStatus(a.id, e.target.value)}
                       >
                         {DOC_STATUSES.map(s => <option key={s}>{s}</option>)}

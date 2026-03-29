@@ -3,6 +3,11 @@ const Applicant = require('../models/Applicant');
 // POST /api/applicants
 const createApplicant = async (req, res) => {
   try {
+    const role = req.headers['x-role'];
+    if (role !== 'Admission Officer') {
+      return res.status(403).json({ error: 'Unauthorized: Only Admission Officer can create applicants' });
+    }
+
     const {
       name, email, phone, date_of_birth, gender,
       category, entry_type, quota_type, marks,

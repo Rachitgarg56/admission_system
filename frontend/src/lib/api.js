@@ -1,8 +1,12 @@
 const BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 
 async function apiFetch(path, options = {}) {
+  const role = typeof window !== 'undefined' ? localStorage.getItem('user-role') : 'Admission Officer';
   const res = await fetch(`${BASE}${path}`, {
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 
+      'Content-Type': 'application/json',
+      'x-role': role || 'Admission Officer'
+    },
     ...options,
   });
   const data = await res.json();
