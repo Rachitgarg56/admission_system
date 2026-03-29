@@ -1,6 +1,6 @@
 # Admission Management System
 
-A minimal web-based admission management system built for the edumerge assignment.
+A minimal web-based admission management system.
 
 **Tech Stack:** Next.js 14 (App Router) + Tailwind CSS · Node.js + Express (MVC) · MySQL
 
@@ -160,12 +160,5 @@ Admission Confirmed → Admission Number generated (once, immutable)
 ```
 
 ---
-
-## AI Assistance Disclosure
-
-This project was built with assistance from Claude (Anthropic). AI was used to:
-- Generate boilerplate Express/Next.js structure
-- Write SQL queries and model methods
-- Build UI components and Tailwind styling
 
 All business logic (seat allocation, quota validation, admission number generation, confirmation rules) was reviewed and verified against the BRS requirements.
